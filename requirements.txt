@@ -1,3 +1,7 @@
+# Additional Required Package
+django-gravatar2==1.4.3
+
+# Existing packages (already listed)
 absl-py==2.1.0
 aiofiles==23.2.1
 aiohappyeyeballs==2.4.3
