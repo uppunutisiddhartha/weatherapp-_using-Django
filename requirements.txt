@@ -227,7 +227,6 @@ tensorboard==2.16.2
 tensorboard-data-server==0.7.2
 tensorflow==2.16.1
 tensorflow==2.16.1
-python-3.10
 tensorlayer==2.2.5
 termcolor==2.4.0
 threadpoolctl==3.2.0
