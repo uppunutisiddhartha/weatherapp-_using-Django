@@ -3,6 +3,7 @@ import requests
 from django.core.mail import send_mail
 from .models import Suggestion
 from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
 
 def index(request):
     weather_data = None
@@ -39,39 +40,81 @@ def about(request):
     return render(request,"about.html")
 
 def suggestion(request):
-    if request.method=='POST':
-        email=request.POST['email']
-        title=request.POST['title']
-        suggestion=request.POST['suggestion']
+    if request.method == 'POST':
+        email = request.POST['email']
+        title = request.POST['title']
+        suggestion_text = request.POST['suggestion']
 
-
+        # Save to database
         Suggestion.objects.create(
             email=email,
             title=title,
-            suggestion=suggestion
+            suggestion=suggestion_text
         )
 
-        # Send confirmation email
-        subject = 'Thank You for Your Suggestion!'
-        message = f"""
-        Dear Contributor,
+        # Email content
+        subject = 'Thanks for Your Valuable Suggestion!'
+        from_email = settings.DEFAULT_FROM_EMAIL
+        to_email = [email]
 
-        Thank you so much for taking the time to share your suggestion titled: "{title}".
+        text_content = f"Thank you for your suggestion titled: {title}."
 
-        We genuinely appreciate your input and value your efforts in helping us improve the E.Book Community platform. Every suggestion we receive brings us closer to creating a better experience for all our users.
-
-        If you have more ideas in the future, feel free to reach out anytime!
-
-        Warm regards,  
-        Siddhartha Uppunuti  
-
+        html_content = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <style>
+            .email-container {{
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                padding: 20px;
+                color: #333;
+            }}
+            .content {{
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            }}
+            h2 {{
+                color: #076089;
+            }}
+            p {{
+                font-size: 16px;
+                line-height: 1.6;
+            }}
+            .footer {{
+                margin-top: 20px;
+                font-size: 14px;
+                color: #888;
+            }}
+          </style>
+        </head>
+        <body>
+          <div class="email-container">
+            <div class="content">
+              <h2>Thank You!</h2>
+              <p>Hi ,</p>
+              <p>Thank you for sharing your suggestion titled: <strong>{title}</strong>.</p>
+              <p>I truly appreciate your time and feedback. Your input helps me improve this project and make it more useful for everyone.</p>
+              <p>If you have more ideas or feedback, feel free to reach out again!</p>
+              <p>Best regards,<br>
+              <strong>Siddhartha Uppunuti</strong><br>
+              Developer | Django</p>
+              <div class="footer">
+                <p>This is an automated message. Please do not reply directly.</p>
+              </div>
+            </div>
+          </div>
+        </body>
+        </html>
         """
-        from_email = settings.EMAIL_HOST_USER
-        recipient_list = [email]
-        send_mail(subject, message, from_email, recipient_list)
 
-        return render(request, 'index.html')
+        # Send HTML email
+        email_message = EmailMultiAlternatives(subject, text_content, from_email, to_email)
+        email_message.attach_alternative(html_content, "text/html")
+        email_message.send()
 
+        return render(request, 'index.html', {'success': True})
 
     return render(request, 'index.html')
-    return render(request,"index.html")
