@@ -1,5 +1,8 @@
 from django.shortcuts import render
 import requests
+from django.core.mail import send_mail
+from .models import Suggestion
+from django.conf import settings
 
 def index(request):
     weather_data = None
@@ -29,3 +32,46 @@ def index(request):
             error_message = "Please enter a city name."
 
     return render(request, "index.html", {"weather": weather_data, "error": error_message})
+
+#how i developed this
+
+def about(request):
+    return render(request,"about.html")
+
+def suggestion(request):
+    if request.method=='POST':
+        email=request.POST['email']
+        title=request.POST['title']
+        suggestion=request.POST['suggestion']
+
+
+        Suggestion.objects.create(
+            email=email,
+            title=title,
+            suggestion=suggestion
+        )
+
+        # Send confirmation email
+        subject = 'Thank You for Your Suggestion!'
+        message = f"""
+        Dear Contributor,
+
+        Thank you so much for taking the time to share your suggestion titled: "{title}".
+
+        We genuinely appreciate your input and value your efforts in helping us improve the E.Book Community platform. Every suggestion we receive brings us closer to creating a better experience for all our users.
+
+        If you have more ideas in the future, feel free to reach out anytime!
+
+        Warm regards,  
+        Siddhartha Uppunuti  
+
+        """
+        from_email = settings.EMAIL_HOST_USER
+        recipient_list = [email]
+        send_mail(subject, message, from_email, recipient_list)
+
+        return render(request, 'index.html')
+
+
+    return render(request, 'index.html')
+    return render(request,"index.html")

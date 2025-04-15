@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About project</title>
+    <style>
+        *{
+            margin: 0;
+            box-sizing: border-box;
+            padding: 0;
+        }
+        body{
+            background-color:azure;
+        }
+        nav{
+            background-color: #076089;
+            height: 60px;
+        }
+        nav h5{
+            text-align: center;
+            justify-content: center;
+            padding:15px;
+            font-weight: bold;
+            font-size: 30px;
+            color: #333;
+        }
+        .container{
+            margin: 30px 50px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        .about h2, h3{
+            color: #076089;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 30px;
+        }
+        .container .about,.stack,.suggetion{
+            margin: 10px 20px;
+            border-left: solid blue 5px;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        .about li{
+            list-style: none;
+            padding-left: 20px;
+        }
+        .stack li{
+            list-style: none;
+            padding-left: 20px;
+        }
+        .stack h5{
+            color: #076089;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 30px;
+        }
+        .suggetion {
+            margin: 10px 20px;
+            padding: 20px;
+        }
+        .suggetion p{
+          text-align: left;  
+          padding: 5px 10px;
+        }
+       .copyright h4,p{
+        text-align: center;
+       }
+       
+        @media (max-width: 768px) {
+            nav h5 {
+                font-size: 24px;
+                padding: 18px 15px;
+            }
+            .container {
+                margin: 20px 30px;
+            }
+            .about h2, h3, .stack h5 {
+                font-size: 26px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav h5 {
+                font-size: 20px;
+                padding: 20px 15px;
+            }
+            .container {
+                margin: 15px;
+            }
+            .about h2, h3, .stack h5 {
+                font-size: 22px;
+            }
+            .container .about, .stack, .suggetion {
+                margin: 10px 0;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+   <nav>
+    <h5>Project Overview</h5>
+   </nav> 
+
+   <div class="container">
+    <div class="about">
+        <h2>About the Project</h2>
+        <p>This project is a simple weather application built using Django and OpenWeatherMap API. It allows users to search for any city and view the current weather conditions such as temperature, humidity, wind speed, and weather description.</p>
+    
+        <h3>Features:</h3>
+        <ul>
+          <li>Search weather by city name</li>
+          <li>Real-time data fetched from OpenWeather API</li>
+          <li>Displays temperature, humidity, pressure, wind speed, and weather description</li>
+          <li>Responsive design for better user experience</li>
+        </ul>
+       </div>
+       <div class="stack">
+        <h5>Technologies Used</h5>
+        <ul>
+            <li><strong>Backend:</strong> Django (Python)</li>
+            <li><strong>API:</strong> OpenWeatherMap API</li>
+            <li><strong>Frontend:</strong> HTML, CSS, Bootstrap</li>
+        </ul>
+        <div style="margin-top: 20px;">
+            <a href="https://github.com/uppunutisiddhartha/weatherapp-_using-Django" target="_blank" style="text-decoration: none; background-color: #076089; color: white; padding: 10px 20px; border-radius: 5px; display: inline-block;">View on GitHub</a>
+          </div>
+       </div>
+       <div class="suggetion">
+        <h2>Have a Suggestion?</h2>
+        <p>I'd love to hear your thoughts or improvements for this project. Please fill out the form </p>
+        <a href="{% url 'index' %}" style="text-decoration: none; background-color: #076089; color: white; padding: 10px 20px; border-radius: 5px; display: inline-flex; align-items: center; gap: 8px;">
+            <i class="fas fa-arrow-left"></i> Back to Weather App
+        </a> 
+       </div>
+   </div>
+   <footer>
+    <div class="copyright">
+        <h4>Weather Forecast App</h4>
+       <p> &copy; 2025 Weather App. All rights reserved.</p>
+    </div>
+   </footer>
+</body>
+</html>
