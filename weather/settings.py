@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ROOT_URLCONF = 'weather.urls'
 
 TEMPLATES = [
@@ -128,3 +128,18 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'ebookcommunuty@gmail.com'
 EMAIL_HOST_PASSWORD = 'eirn vvzo qaob mtmc'
+
+
+
+
+
+
+import os
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # This is the missing piece
+
+# Optional if you have your own static folder
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
