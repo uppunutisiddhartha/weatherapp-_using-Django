@@ -366,7 +366,7 @@
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" href="{% url 'about' %}">Project OverView</a></li>
-              <li><a class="dropdown-item" href="#suggestion">Contribute a Suggestion
+              <li><a class="dropdown-item" href="#suggest">Contribute a Suggestion
 
               </a></li>
             </ul>
@@ -455,10 +455,8 @@
         <p class="error">{{ error }}</p>
         {% endif %}
     </div>
-    <div style="text-align: center; margin: 20px 0;">
-        <a href="{% url 'about' %}" class="btn btn-primary">About this App</a>
-    </div>
-    <div class="suggestion-section">
+    
+    <div class="suggestion-section" id="suggest">
         <div class="suggestion-box">
             <div class="suggestion-header">
                 <i class="fas fa-lightbulb"></i> Share Your Suggestions
